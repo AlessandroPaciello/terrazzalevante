@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_links_logo_buttons",
+  "info": {
+    "displayName": "Button image",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "newTab": {
+      "type": "boolean"
+    },
+    "img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "altText": {
+      "type": "string"
+    }
+  }
+}

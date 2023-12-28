@@ -20,16 +20,19 @@ async function getGlobal(lang: string): Promise<any> {
 
   const urlParamsObject = {
     populate: [
-      "metadata.shareImage",
-      "favicon",
-      "notificationBanner.link",
-      "navbar.links",
-      "navbar.navbarLogo.logoImg",
-      "footer.footerLogo.logoImg",
-      "footer.menuLinks",
-      "footer.legalLinks",
-      "footer.socialLinks",
-      "footer.categories",
+      // "metadata.shareImage",
+      // "favicon",
+      // "notificationBanner.link",
+      // "navbar.menu",
+      // "navbar.navbarLogo.logoImg",
+      // "footer.footerLogo.logoImg",
+      // "footer.menuLinks",
+      // "footer.legalLinks",
+      // "footer.socialLinks",
+      // "footer.categories",
+      "navbar.menu",
+      "navbar.logo",
+      "navbar.logo.img"
     ],
     locale: lang,
   };
@@ -61,33 +64,33 @@ export default async function RootLayout({
   params: { lang: string };
 }) {
   const global = await getGlobal(params.lang);
+
+  // console.log('global ------->', global.data.attributes)
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
-  
   const { notificationBanner, navbar, footer } = global.data.attributes;
 
-  const navbarLogoUrl = getStrapiMedia(
-    navbar.navbarLogo.logoImg.data.attributes.url
-  );
-
-  const footerLogoUrl = getStrapiMedia(
-    footer.footerLogo.logoImg.data.attributes.url
-  );
+  // const footerLogoUrl = getStrapiMedia(
+  //   footer.footerLogo.logoImg.data.attributes.url
+  // );
 
   return (
     <html lang={params.lang}>
       <body>
-        <Navbar
-          links={navbar.links}
-          logoUrl={navbarLogoUrl}
-          logoText={navbar.navbarLogo.logoText}
-        />
-
-        <main className="dark:bg-black dark:text-gray-100 min-h-screen">
-          {children}
+        <main className="bg-primary min-h-screen">
+          <Navbar
+            logo={navbar.logo}
+            menu={navbar.menu}
+            title={navbar.title}
+          // links={navbar.links}
+          // logoUrl={navbarLogoUrl}
+          // logoText={navbar.navbarLogo.logoText}
+          />
+          {/* {children} */}
+          <div>Hello world</div>
         </main>
 
-        <Banner data={notificationBanner} />
+        {/* <Banner data={notificationBanner} />
 
         <Footer
           logoUrl={footerLogoUrl}
@@ -96,7 +99,7 @@ export default async function RootLayout({
           categoryLinks={footer.categories.data}
           legalLinks={footer.legalLinks}
           socialLinks={footer.socialLinks}
-        />
+        /> */}
       </body>
     </html>
   );

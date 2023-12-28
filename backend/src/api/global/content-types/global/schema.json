@@ -9,8 +9,6 @@
     "description": ""
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
     "draftAndPublish": false
   },
   "pluginOptions": {
@@ -52,16 +50,6 @@
         }
       }
     },
-    "navbar": {
-      "type": "component",
-      "repeatable": false,
-      "component": "layout.navbar",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "footer": {
       "type": "component",
       "repeatable": false,
@@ -71,6 +59,16 @@
         }
       },
       "component": "layout.footer"
+    },
+    "navbar": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "layout.navbar"
     }
   }
 }

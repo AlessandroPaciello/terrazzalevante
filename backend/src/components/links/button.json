@@ -15,7 +15,8 @@
       "type": "enumeration",
       "enum": [
         "primary",
-        "secondary"
+        "secondary",
+        "image"
       ]
     }
   }
