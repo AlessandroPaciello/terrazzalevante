@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_elements_galleries",
+  "info": {
+    "displayName": "gallery",
+    "icon": "picture",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "richtext"
+    },
+    "room": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::room.room"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_sections_bookings",
+  "info": {
+    "displayName": "booking",
+    "icon": "calendar",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subText": {
+      "type": "string"
+    },
+    "rooms": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::room.room"
+    },
+    "inputs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.input"
+    },
+    "submit": {
+      "type": "component",
+      "repeatable": false,
+      "component": "links.button"
+    },
+    "success": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.alert"
+    }
+  }
+}

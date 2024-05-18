@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import { CgWebsite } from "react-icons/cg";
 import { FaDiscord } from "react-icons/fa";
 import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
+import { Typography } from "@material-tailwind/react";
 
 interface FooterLink {
   id: number;
@@ -28,9 +29,7 @@ function FooterLink({ url, text }: FooterLink) {
     <li className="flex">
       <Link
         href={url}
-        className={`hover:dark:text-violet-400 ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
-        }}`}
+        className={`hover:text-active`}
       >
         {text}
       </Link>
@@ -76,15 +75,35 @@ export default function Footer({
 }: {
   logoUrl: string | null;
   logoText: string | null;
-  menuLinks: Array<FooterLink>;
-  categoryLinks: Array<CategoryLink>;
-  legalLinks: Array<FooterLink>;
-  socialLinks: Array<FooterLink>;
+  menuLinks?: Array<FooterLink>;
+  categoryLinks?: Array<CategoryLink>;
+  legalLinks?: Array<FooterLink>;
+  socialLinks?: Array<FooterLink>;
 }) {
 
   return (
-    <footer className="py-6 dark:bg-black dark:text-gray-50">
-      <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
+    <footer className="w-full bg-primary border-t border-secondary text-tertiary p-8">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+        <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
+          <Logo src={logoUrl}>
+            <Typography
+              className="mr-4 cursor-pointer py-1.5 font-medium"
+            >
+              {logoText}
+            </Typography>
+          </Logo>
+        </div>
+        <div className="col-span-6 text-center md:text-left md:col-span-3">
+            <p className="pb-1 text-lg font-medium">Menu</p>
+            <ul>
+              {menuLinks?.map((link: FooterLink) => (
+                <FooterLink key={link.id} {...link} />
+              ))}
+            </ul>
+          </div>
+      </div>      
+      
+      {/* <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
         <div className="grid grid-cols-12">
           <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
             <Logo src={logoUrl}>
@@ -143,8 +162,8 @@ export default function Footer({
               );
             })}
           </div>
-        </div>
-      </div>
+        </div> 
+      </div>*/}
     </footer>
   );
 }

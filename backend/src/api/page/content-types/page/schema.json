@@ -38,7 +38,10 @@
         "sections.pricing",
         "sections.lead-form",
         "sections.features",
-        "sections.heading"
+        "sections.heading",
+        "sections.booking",
+        "sections.hero-rooms",
+        "sections.feture-rooms"
       ],
       "pluginOptions": {
         "i18n": {

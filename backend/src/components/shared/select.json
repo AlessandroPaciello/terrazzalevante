@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_selects",
+  "info": {
+    "displayName": "select"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

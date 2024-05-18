@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
-import { fetchAPI } from "./utils/fetch-api";
+import { getStrapiMedia, getStrapiURL } from "./shared/utils/api-helpers";
+import { fetchAPI } from "./shared/utils/fetch-api";
 
 import { i18n } from "../../../i18n-config";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
+import { FALLBACK_SEO } from "./shared/utils/constants";
+import geometria from "./shared/fonts/geometria";
 
 
 async function getGlobal(lang: string): Promise<any> {
@@ -20,8 +21,6 @@ async function getGlobal(lang: string): Promise<any> {
 
   const urlParamsObject = {
     populate: [
-      // "metadata.shareImage",
-      // "favicon",
       // "notificationBanner.link",
       // "navbar.menu",
       // "navbar.navbarLogo.logoImg",
@@ -30,9 +29,13 @@ async function getGlobal(lang: string): Promise<any> {
       // "footer.legalLinks",
       // "footer.socialLinks",
       // "footer.categories",
+      "metadata.shareImage",
+      "favicon",
       "navbar.menu",
       "navbar.logo",
-      "navbar.logo.img"
+      "navbar.logo.img",
+      "footer.footerLogo.logoImg",
+      "footer.menuLinks"
     ],
     locale: lang,
   };
@@ -70,15 +73,14 @@ export default async function RootLayout({
   if (!global.data) return null;
   const { notificationBanner, navbar, footer } = global.data.attributes;
 
-  // const footerLogoUrl = getStrapiMedia(
-  //   footer.footerLogo.logoImg.data.attributes.url
-  // );
+  const footerLogoUrl = getStrapiMedia(
+    footer.footerLogo.logoImg.data.attributes.url
+  );
 
   return (
-    <html lang={params.lang}>
-      <body>
-        <main className="bg-primary min-h-screen">
-          <Navbar
+    <html lang={params.lang} className={`${geometria.className} scroll-smooth`}>
+      <body className="bg-primary">
+      <Navbar
             logo={navbar.logo}
             menu={navbar.menu}
             title={navbar.title}
@@ -86,20 +88,20 @@ export default async function RootLayout({
           // logoUrl={navbarLogoUrl}
           // logoText={navbar.navbarLogo.logoText}
           />
-          {/* {children} */}
-          <div>Hello world</div>
+        <main className="min-h-screen p-6 overflow-hidden">
+          {children}
         </main>
 
-        {/* <Banner data={notificationBanner} />
+        {/* <Banner data={notificationBanner} /> */}
 
         <Footer
           logoUrl={footerLogoUrl}
           logoText={footer.footerLogo.logoText}
           menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
-          legalLinks={footer.legalLinks}
-          socialLinks={footer.socialLinks}
-        /> */}
+          // categoryLinks={footer.categories.data}
+          // legalLinks={footer.legalLinks}
+          // socialLinks={footer.socialLinks}
+        />
       </body>
     </html>
   );

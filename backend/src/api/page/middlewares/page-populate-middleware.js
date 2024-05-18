@@ -16,9 +16,20 @@ const populate = {
       feature: {
         populate: {
           fields: ["title", "description", "showLink", "newTab", "url", "text"],
-          media: {
-            fields: ["url", "alternativeText", "caption", "width", "height"],
-          },
+          room: {
+            fields: ["title", "description"],
+            populate: {
+              // about: {
+              //   fields: ["label", "value"],
+              // },
+              image: {
+                fields: ["url", "alternativeText", "caption", "width", "height"],
+              },
+            }
+          }
+          // media: {
+          //   fields: ["url", "alternativeText", "caption", "width", "height"],
+          // },
         },
       },
       testimonials: {
@@ -34,6 +45,34 @@ const populate = {
       submitButton: {
         populate: true,
       },
+      inputs: {
+        fields: ["label", "placeholder", "type", "extend"],
+        populate: {
+          options: {
+            filends: ["label", "value"],
+          }
+        }
+      },
+      submit: {
+        populate: true
+      },
+      success: {
+        populate: true
+      },
+      rooms: {
+        fields: ["title", "description"],
+        populate: {
+          about: {
+            fields: ["label", "value"],
+          },
+          image: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+        }
+      }
+    },
+    featureColumn: {
+      fields: ["title", "description"],
     },
   },
   seo: {
@@ -50,9 +89,7 @@ module.exports = (config, { strapi }) => {
       filters: { slug: ctx.query.filters.slug },
       locale: ctx.query.locale,
     };
-
-    console.log("page-populate-middleware.js: ctx.query = ", ctx.query);
-
+    
     await next();
   };
 };

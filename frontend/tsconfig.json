@@ -20,9 +20,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "tailwindConfig": ["./tailwind.config.js"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/LoadMorePosts.tsx", "src/app/blog-3/page.tsx", "src/app/[lang]/components/ErrorBoundry.jsx", "src/app/[lang]/components/ErrorBoundary.tsx", "src/app/global-error.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "global.d.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/LoadMorePosts.tsx", "src/app/blog-3/page.tsx", "src/app/[lang]/components/ErrorBoundry.jsx", "src/app/[lang]/components/ErrorBoundary.tsx", "src/app/global-error.tsx", "src/app/[lang]/[...slug]/page.tsx old"],
   "exclude": ["node_modules"]
 }

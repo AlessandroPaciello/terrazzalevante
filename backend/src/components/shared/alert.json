@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_alerts",
+  "info": {
+    "displayName": "Alert"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "close": {
+      "type": "string"
+    },
+    "show": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_elements_about_rooms",
+  "info": {
+    "displayName": "about room"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

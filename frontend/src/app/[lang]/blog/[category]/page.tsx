@@ -1,5 +1,5 @@
 import PageHeader from '@/app/[lang]/components/PageHeader';
-import { fetchAPI } from '@/app/[lang]/utils/fetch-api';
+import { fetchAPI } from '@/app/[lang]/shared/utils/fetch-api';
 import BlogList from '@/app/[lang]/views/blog-list';
 
 async function fetchPostsByCategory(filter: string) {

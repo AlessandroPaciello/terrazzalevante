@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_shared_inputs",
+  "info": {
+    "displayName": "Input",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "placeholder": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "date",
+        "text",
+        "select"
+      ]
+    },
+    "options": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.option"
+    },
+    "extend": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
