@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ElementsAboutRoom extends Schema.Component {
+  collectionName: 'components_elements_about_rooms';
+  info: {
+    displayName: 'about room';
+  };
+  attributes: {
+    label: Attribute.String;
+    value: Attribute.String;
+  };
+}
+
 export interface ElementsFeatureColumn extends Schema.Component {
   collectionName: 'components_slices_feature_columns';
   info: {
@@ -35,15 +46,14 @@ export interface ElementsFeature extends Schema.Component {
   collectionName: 'components_elements_features';
   info: {
     displayName: 'Feature';
+    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    media: Attribute.Media;
     showLink: Attribute.Boolean & Attribute.DefaultTo<false>;
     newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
     url: Attribute.String;
     text: Attribute.String;
+    room: Attribute.Relation<'elements.feature', 'oneToOne', 'api::room.room'>;
   };
 }
 
@@ -105,23 +115,6 @@ export interface ElementsPlan extends Schema.Component {
     isRecommended: Attribute.Boolean;
     price: Attribute.Decimal;
     pricePeriod: Attribute.String;
-    product_features: Attribute.Relation<
-      'elements.plan',
-      'oneToMany',
-      'api::product-feature.product-feature'
-    >;
-  };
-}
-
-export interface ElementsRoomInfo extends Schema.Component {
-  collectionName: 'components_elements_room_infos';
-  info: {
-    displayName: 'room info';
-  };
-  attributes: {
-    title: Attribute.String;
-    image: Attribute.Media;
-    description: Attribute.Text;
   };
 }
 
@@ -151,11 +144,6 @@ export interface LayoutFooter extends Schema.Component {
     menuLinks: Attribute.Component<'links.link', true>;
     legalLinks: Attribute.Component<'links.link', true>;
     socialLinks: Attribute.Component<'links.social-link', true>;
-    categories: Attribute.Relation<
-      'layout.footer',
-      'oneToMany',
-      'api::category.category'
-    >;
   };
 }
 
@@ -289,6 +277,9 @@ export interface SectionsBooking extends Schema.Component {
       'oneToMany',
       'api::room.room'
     >;
+    inputs: Attribute.Component<'shared.input', true>;
+    submit: Attribute.Component<'links.button'>;
+    success: Attribute.Component<'shared.alert'>;
   };
 }
 
@@ -341,6 +332,34 @@ export interface SectionsFeatures extends Schema.Component {
     heading: Attribute.String;
     description: Attribute.Text;
     feature: Attribute.Component<'elements.feature', true>;
+    extend: Attribute.Boolean;
+  };
+}
+
+export interface SectionsFetureRooms extends Schema.Component {
+  collectionName: 'components_sections_feture_rooms';
+  info: {
+    displayName: 'FetureRooms';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.RichText;
+    feature: Attribute.Component<'elements.feature', true>;
+  };
+}
+
+export interface SectionsGallery extends Schema.Component {
+  collectionName: 'components_elements_galleries';
+  info: {
+    displayName: 'gallery';
+    icon: 'picture';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    text: Attribute.RichText;
+    room: Attribute.Relation<'sections.gallery', 'oneToOne', 'api::room.room'>;
   };
 }
 
@@ -355,6 +374,19 @@ export interface SectionsHeading extends Schema.Component {
   };
 }
 
+export interface SectionsHeroRooms extends Schema.Component {
+  collectionName: 'components_sections_hero_rooms';
+  info: {
+    displayName: 'HeroRooms';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    text: Attribute.RichText;
+    picture: Attribute.Media;
+  };
+}
+
 export interface SectionsHero extends Schema.Component {
   collectionName: 'components_slices_heroes';
   info: {
@@ -365,9 +397,9 @@ export interface SectionsHero extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
     picture: Attribute.Media & Attribute.Required;
     buttons: Attribute.Component<'links.button-link', true>;
+    description: Attribute.Text;
   };
 }
 
@@ -428,6 +460,23 @@ export interface SectionsRichText extends Schema.Component {
   };
 }
 
+export interface SectionsServices extends Schema.Component {
+  collectionName: 'components_sections_services';
+  info: {
+    displayName: 'services';
+    icon: 'information';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.RichText;
+    services: Attribute.Relation<
+      'sections.services',
+      'oneToOne',
+      'api::room.room'
+    >;
+  };
+}
+
 export interface SectionsTestimonialsGroup extends Schema.Component {
   collectionName: 'components_slices_testimonials_groups';
   info: {
@@ -443,6 +492,33 @@ export interface SectionsTestimonialsGroup extends Schema.Component {
   };
 }
 
+export interface SharedAlert extends Schema.Component {
+  collectionName: 'components_shared_alerts';
+  info: {
+    displayName: 'Alert';
+  };
+  attributes: {
+    label: Attribute.String;
+    close: Attribute.String;
+    show: Attribute.Boolean;
+  };
+}
+
+export interface SharedInput extends Schema.Component {
+  collectionName: 'components_shared_inputs';
+  info: {
+    displayName: 'Input';
+    description: '';
+  };
+  attributes: {
+    placeholder: Attribute.String;
+    label: Attribute.String;
+    type: Attribute.Enumeration<['date', 'text', 'select']>;
+    options: Attribute.Component<'shared.option', true>;
+    extend: Attribute.Boolean & Attribute.DefaultTo<false>;
+  };
+}
+
 export interface SharedMedia extends Schema.Component {
   collectionName: 'components_shared_media';
   info: {
@@ -452,6 +528,17 @@ export interface SharedMedia extends Schema.Component {
   };
   attributes: {
     file: Attribute.Media;
+  };
+}
+
+export interface SharedOption extends Schema.Component {
+  collectionName: 'components_shared_options';
+  info: {
+    displayName: 'option';
+  };
+  attributes: {
+    label: Attribute.String;
+    value: Attribute.String;
   };
 }
 
@@ -493,6 +580,17 @@ export interface SharedRoom extends Schema.Component {
   };
 }
 
+export interface SharedSelect extends Schema.Component {
+  collectionName: 'components_shared_selects';
+  info: {
+    displayName: 'select';
+  };
+  attributes: {
+    label: Attribute.String;
+    value: Attribute.String;
+  };
+}
+
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
@@ -531,9 +629,10 @@ export interface SharedVideoEmbed extends Schema.Component {
   };
 }
 
-declare module '@strapi/strapi' {
+declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'elements.about-room': ElementsAboutRoom;
       'elements.feature-column': ElementsFeatureColumn;
       'elements.feature-row': ElementsFeatureRow;
       'elements.feature': ElementsFeature;
@@ -541,7 +640,6 @@ declare module '@strapi/strapi' {
       'elements.logos': ElementsLogos;
       'elements.notification-banner': ElementsNotificationBanner;
       'elements.plan': ElementsPlan;
-      'elements.room-info': ElementsRoomInfo;
       'elements.testimonial': ElementsTestimonial;
       'layout.footer': LayoutFooter;
       'layout.logo': LayoutLogo;
@@ -557,17 +655,25 @@ declare module '@strapi/strapi' {
       'sections.feature-columns-group': SectionsFeatureColumnsGroup;
       'sections.feature-rows-group': SectionsFeatureRowsGroup;
       'sections.features': SectionsFeatures;
+      'sections.feture-rooms': SectionsFetureRooms;
+      'sections.gallery': SectionsGallery;
       'sections.heading': SectionsHeading;
+      'sections.hero-rooms': SectionsHeroRooms;
       'sections.hero': SectionsHero;
       'sections.large-video': SectionsLargeVideo;
       'sections.lead-form': SectionsLeadForm;
       'sections.pricing': SectionsPricing;
       'sections.rich-text': SectionsRichText;
+      'sections.services': SectionsServices;
       'sections.testimonials-group': SectionsTestimonialsGroup;
+      'shared.alert': SharedAlert;
+      'shared.input': SharedInput;
       'shared.media': SharedMedia;
+      'shared.option': SharedOption;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.room': SharedRoom;
+      'shared.select': SharedSelect;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
       'shared.video-embed': SharedVideoEmbed;
