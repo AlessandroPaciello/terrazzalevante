@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image";
-import HighlightedText from "./HighlightedText";
 import { getStrapiMedia } from "../shared/utils/api-helpers";
 import { useState } from "react";
 import creattion from "../shared/fonts/creattion";
@@ -100,7 +99,8 @@ interface ControllerImg {
   imgUrl: (string | null)[],
   active: boolean,
   activeImage: number,
-  handlerActiveImg: (index: number) => void
+  handlerActiveImg: (index: number) => void,
+  children?: React.ReactNode
 }
 const ControllerImgActive = ({ imgUrl, handlerActiveImg, active, activeImage }: ControllerImg) => {
   const md = `md:w-4/6 md:float-right md:right-2 md:translate-y-full md:top-auto md:absolute md:mt-6`;
