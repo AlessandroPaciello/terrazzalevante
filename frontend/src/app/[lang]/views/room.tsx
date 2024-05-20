@@ -24,9 +24,19 @@ export default function PostList({ data }: { data: StrapiRoom }) {
             }
         }
     }
+
+    const aboutProos = {
+        data: {
+            title: data.attributes.title,
+            description: data.attributes.description,
+            services: {
+                data: data
+            }
+        }
+    }
     return <section id='room' className="w-full">
         <HeroRooms data={heroProps.data} />
         <Gallery data={galleryProps.data}/>
-        <About data={data} />
+        <About data={aboutProos.data} />
     </section>
 }
